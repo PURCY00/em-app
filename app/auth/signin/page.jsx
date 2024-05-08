@@ -2,7 +2,7 @@
 import ImageWrapper from "@/app/components/ImageWrapper";
 import { Icon } from "@iconify/react";
 import logo from "@/public/logo.png";
-import { Button, Form, InputGroup } from "rsuite";
+import { Button, Checkbox, Form, Input, InputGroup } from "rsuite";
 import { fn } from "@/utils/utilityFunction";
 import Link from "next/link";
 
@@ -11,32 +11,42 @@ const page = () => {
         <section>
             {/* header */}
             <div className={`text-center flex flex-col items-center mb-5`}>
-                <ImageWrapper src={logo} alt={`logo`} width={fn.rem(100)} height={fn.rem(50)} objectFit={`contain`} />
-                <h1 className={`text-h1 font-semibold`}>Welcome to EM</h1>
+                <Link href={`/`}>
+                    <ImageWrapper src={logo} alt={`logo`} width={fn.rem(100)} height={fn.rem(50)} objectFit={`contain`} />
+                </Link>
+                <h1 className={`text-h1 font-semibold`}>Welcome back to EM</h1>
                 <h6 className={`text-h6`}>Sign in to your account</h6>
             </div>
             {/* form */}
 
-            <Form style={{ maxWidth: fn.rem(300) }}>
+            <Form style={{ maxWidth: fn.rem(500) }}>
                 {/* email */}
                 <Form.Group controlId={"email"}>
-                    <InputGroup inside>
+                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
                         <InputGroup.Addon className={`text-blue-500`}>
-                            <Icon icon='arcticons:huawei-email' />
+                            <Icon icon='system-uicons:mail' />
                         </InputGroup.Addon>
-                        <Form.Control type={`email`} name='email' placeholder='Email' />
+                        <Form.Control className={`bg-transparent`} type={`email`} name='email' placeholder='Email' />
+                        {/* <Input type={`email`} name='email' placeholder='Email' /> */}
                     </InputGroup>
                 </Form.Group>
 
                 {/* password */}
-                <Form.Group controlId={"password"}>
-                    <InputGroup inside>
+                <Form.Group controlId={"password"} style={{ marginBottom: 0 }}>
+                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
                         <InputGroup.Addon className={`text-blue-500`}>
-                            <Icon icon='ri:user-line' />
+                            <Icon icon='lets-icons:lock' />
                         </InputGroup.Addon>
-                        <Form.Control type={`password`} name='password' placeholder='Password' />
+                        <Form.Control className={`bg-transparent`} type={`password`} name='password' placeholder='Password' />
                     </InputGroup>
                 </Form.Group>
+
+                <div className={`flex items-center justify-between text-xs mb-3`}>
+                    <Checkbox>Remember me</Checkbox>
+                    <Link href={`/auth/forgot-password`}>
+                        <p className={`underline`}>Forgot Password?</p>
+                    </Link>
+                </div>
 
                 {/* submit button */}
                 <div>
@@ -44,8 +54,8 @@ const page = () => {
                 </div>
                 <div className={`w-full text-xs`}>
                     <p className={`my-3`}>
-                        Alreaday have an account?{" "}
-                        <Link href={`/auth/signup`} className={`text-emBlue font-bold`}>
+                        Dont have an account yet?
+                        <Link href={`/auth/signup`} className={`ml-1 text-emBlue font-bold`}>
                             Sign up
                         </Link>
                     </p>

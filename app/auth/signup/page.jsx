@@ -12,48 +12,50 @@ const page = () => {
         <section>
             {/* header */}
             <div className={`text-center flex flex-col items-center mb-5`}>
-                <ImageWrapper src={logo} alt={`logo`} width={fn.rem(100)} height={fn.rem(50)} objectFit={`contain`} />
+                <Link href={`/`}>
+                    <ImageWrapper src={logo} alt={`logo`} width={fn.rem(100)} height={fn.rem(50)} objectFit={`contain`} />
+                </Link>
                 <h1 className={`text-h1 font-semibold`}>Welcome to EM</h1>
                 <h6 className={`text-h6`}>Sign up for free</h6>
             </div>
             {/* form */}
 
-            <Form style={{ maxWidth: fn.rem(300) }}>
+            <Form style={{ maxWidth: fn.rem(500) }}>
                 {/* email */}
                 <Form.Group controlId={"email"}>
-                    <InputGroup inside>
-                        <InputGroup.Addon className={`text-blue-500`}>
-                            <Icon icon='arcticons:huawei-email' />
+                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
+                        <InputGroup.Addon className={`text-emBlue`}>
+                            <Icon icon='system-uicons:mail' />
                         </InputGroup.Addon>
-                        <Form.Control type={`email`} name='email' placeholder='Email' />
+                        <Form.Control className={`bg-transparent`} type={`email`} name='email' placeholder='Email' />
                     </InputGroup>
                 </Form.Group>
                 {/* user name */}
                 <Form.Group controlId={"username"}>
-                    <InputGroup inside>
-                        <InputGroup.Addon className={`text-blue-500`}>
+                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
+                        <InputGroup.Addon className={`text-emBlue`}>
                             <Icon icon='ri:user-line' />
                         </InputGroup.Addon>
-                        <Form.Control name='username' placeholder='Username' />
+                        <Form.Control className={`bg-transparent`} name='username' placeholder='Username' />
                     </InputGroup>
                 </Form.Group>
                 {/* password */}
                 <Form.Group controlId={"password"}>
-                    <InputGroup inside>
-                        <InputGroup.Addon className={`text-blue-500`}>
-                            <Icon icon='ri:user-line' />
+                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
+                        <InputGroup.Addon className={`text-emBlue`}>
+                            <Icon icon='lets-icons:lock' />
                         </InputGroup.Addon>
-                        <Form.Control type={`password`} name='password' placeholder='Password' />
+                        <Form.Control className={`bg-transparent`} type={`password`} name='password' placeholder='Password' />
                     </InputGroup>
                 </Form.Group>
 
                 {/* confirm password */}
-                <Form.Group controlId={"password"}>
-                    <InputGroup inside>
-                        <InputGroup.Addon className={`text-blue-500`}>
-                            <Icon icon='ri:user-line' />
+                <Form.Group controlId={"confirm-password"}>
+                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
+                        <InputGroup.Addon className={`text-emBlue`}>
+                            <Icon icon='lets-icons:lock' />
                         </InputGroup.Addon>
-                        <Form.Control type={`password`} name='confirm-password' placeholder='Confirm Password' />
+                        <Form.Control className={`bg-transparent`} type={`password`} name='confirm-password' placeholder='Confirm Password' />
                     </InputGroup>
                 </Form.Group>
                 {/* submit button */}
@@ -62,8 +64,8 @@ const page = () => {
                 </div>
                 <div className={`w-full text-xs`}>
                     <p className={`my-3`}>
-                        Alreaday have an account?{" "}
-                        <Link href={`/auth/signin`} className={`text-emBlue font-bold`}>
+                        Alreaday have an account?
+                        <Link href={`/auth/signin`} className={`ml-1 text-emBlue font-bold`}>
                             Sign In
                         </Link>
                     </p>
