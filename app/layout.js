@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "rsuite/dist/rsuite-no-reset.min.css";
 import "./globals.css";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 

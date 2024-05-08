@@ -14,6 +14,7 @@ module.exports = {
                 emBlue: `#1565D8`,
                 emRed: `#FF0000`,
                 emGrey: `#83979B`,
+                emBgColor: `#83979B50`,
             },
             fontSize: {
                 h1: "2.5rem",
