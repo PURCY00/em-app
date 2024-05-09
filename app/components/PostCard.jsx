@@ -7,7 +7,7 @@ import moneyImg from "@/public/money.png";
 import { fn } from "@/utils/utilityFunction";
 import { Icon } from "@iconify/react";
 
-const PostCard = ({ number }) => {
+const PostCard = ({ post }) => {
     return (
         <article className={`bg-white rounded-lg p-5`}>
             <section className={`flex items-center justify-between`}>
@@ -21,7 +21,7 @@ const PostCard = ({ number }) => {
                         />
                     </div>
                     <div>
-                        <p className={`font-semibold text-h5`}>Yuji Itadori</p>
+                        <p className={`font-semibold text-h5`}>{post.name}</p>
                         <p>8 mins ago</p>
                     </div>
                 </div>
@@ -38,7 +38,7 @@ const PostCard = ({ number }) => {
                 </section>
             </section>
             <article className={`my-5`}>
-                <p>{number}</p>
+                <p>{post.description}</p>
             </article>
             <article style={{ height: fn.rem(545) }} className={`my-5 w-full rounded-lg overflow-hidden`}>
                 <ImageWrapper alt={`auth-img`} src={moneyImg} width={`100%`} height={`100%`} objectFit={`cover`} />

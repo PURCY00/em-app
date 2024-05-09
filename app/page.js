@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import PostCreationTemplate from "./components/PostTemplate";
 import SideBar from "./components/SideBar";
 
-const page = () => {
+const Home = () => {
     return (
         <main>
             <nav>
@@ -13,4 +13,4 @@ const page = () => {
         </main>
     );
 };
-export default page;
+export default Home;
