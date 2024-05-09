@@ -1,5 +1,6 @@
 import GridLayout from "./components/GridLayout";
 import Navbar from "./components/Navbar";
+import PostCreationTemplate from "./components/PostTemplate";
 import SideBar from "./components/SideBar";
 
 const page = () => {
@@ -8,7 +9,7 @@ const page = () => {
             <nav>
                 <Navbar />
             </nav>
-            <GridLayout sideBar={<SideBar />} postView={<p>my post</p>} />
+            <GridLayout sideBar={<SideBar />} postView={<PostCreationTemplate />} />
         </main>
     );
 };
