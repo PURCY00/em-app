@@ -6,6 +6,7 @@ import ImageWrapper from "./ImageWrapper";
 import moneyImg from "@/public/money.png";
 import { fn } from "@/utils/utilityFunction";
 import { Icon } from "@iconify/react";
+import CommentModal from "./CommentModal";
 
 const PostCard = ({ post }) => {
     return (
@@ -40,13 +41,14 @@ const PostCard = ({ post }) => {
             <article className={`my-5`}>
                 <p>{post.description}</p>
             </article>
-            <article style={{ height: fn.rem(545) }} className={`my-5 w-full rounded-lg overflow-hidden`}>
+            {/* style={{ height: fn.rem(545) }} */}
+            <article className={`my-5 w-full h-48 md:h-96 rounded-lg overflow-hidden`}>
                 <ImageWrapper alt={`auth-img`} src={moneyImg} width={`100%`} height={`100%`} objectFit={`cover`} />
             </article>
             <section className={`flex justify-between items-center`}>
                 <div className={`flex gap-5`}>
                     <Icon className={`text-emRed`} fontSize={fn.rem(41)} icon='icon-park-solid:like' />
-                    <Icon fontSize={fn.rem(41)} icon='mingcute:comment-2-line' />
+                    <CommentModal />
                 </div>
                 <div>
                     <Icon fontSize={fn.rem(41)} icon='mingcute:send-fill' />

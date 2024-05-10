@@ -43,7 +43,7 @@ export const anArrayOfposts = [
 ];
 
 const PostCreationTemplate = () => {
-    const [isPostCreationTemplateVisble, setPostCreationTemplateVisibility] = useState(false);
+    const [isLocationProfile, setLocationProfile] = useState(false);
 
     // // next method
     const pathname = usePathname();
@@ -53,9 +53,9 @@ const PostCreationTemplate = () => {
 
     useEffect(() => {
         if (pathname === `/profile`) {
-            setPostCreationTemplateVisibility(true);
+            setLocationProfile(true);
         } else {
-            setPostCreationTemplateVisibility(false);
+            setLocationProfile(false);
         }
     }, [pathname]);
 
@@ -65,7 +65,7 @@ const PostCreationTemplate = () => {
 
     return (
         <main>
-            <section className={`mb-4`} hidden={isPostCreationTemplateVisble}>
+            <section className={`mb-4`} hidden={isLocationProfile}>
                 <PostsubmissionTemplate />
             </section>
             <section className={`mb-4 flex flex-col gap-4`}>{postCardList}</section>
