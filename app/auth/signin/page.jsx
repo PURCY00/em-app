@@ -1,12 +1,39 @@
 "use client";
+
 import ImageWrapper from "@/app/components/ImageWrapper";
 import { Icon } from "@iconify/react";
 import logo from "@/public/logo.png";
-import { Button, Checkbox, Form, Input, InputGroup } from "rsuite";
+import { Button, Checkbox } from "rsuite";
 import { fn } from "@/utils/utilityFunction";
 import Link from "next/link";
+// import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
 
-const page = () => {
+const SignIn = () => {
+    // const router = useRouter();
+    const { register, handleSubmit, reset } = useForm({
+        criteriaMode: "all",
+    });
+
+    const onSubmit = async (data) => {
+        console.log(data);
+        // try {
+        //     const res = await fetch(`api/register`, {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(data),
+        //     });
+
+        //     if (res.ok) {
+        //         reset();
+        //         router.push(`/`);
+        //     }
+        // } catch (err) {
+        //     console.log(err);
+        // }
+    };
     return (
         <section>
             {/* header */}
@@ -19,27 +46,22 @@ const page = () => {
             </div>
             {/* form */}
 
-            <Form style={{ maxWidth: fn.rem(500) }}>
+            <form onSubmit={handleSubmit(onSubmit)} style={{ maxWidth: fn.rem(500) }}>
                 {/* email */}
-                <Form.Group controlId={"email"}>
-                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
-                        <InputGroup.Addon className={`text-blue-500`}>
-                            <Icon icon='system-uicons:mail' />
-                        </InputGroup.Addon>
-                        <Form.Control className={`bg-transparent`} type={`email`} name='email' placeholder='Email' />
-                        {/* <Input type={`email`} name='email' placeholder='Email' /> */}
-                    </InputGroup>
-                </Form.Group>
+                <div className='my-2 flex items-center border-2 border-emGrey rounded-md overflow-hidden bg-emBgColor'>
+                    <div className={`text-2xl px-2 text-emBlue`}>
+                        <Icon icon='ic:outline-email' />
+                    </div>
+                    <input id='email' type='email' placeholder={`Email`} className='block w-full bg-transparent p-1' {...register(`email`)} />
+                </div>
 
                 {/* password */}
-                <Form.Group controlId={"password"} style={{ marginBottom: 0 }}>
-                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
-                        <InputGroup.Addon className={`text-blue-500`}>
-                            <Icon icon='lets-icons:lock' />
-                        </InputGroup.Addon>
-                        <Form.Control className={`bg-transparent`} type={`password`} name='password' placeholder='Password' />
-                    </InputGroup>
-                </Form.Group>
+                <div className='my-2 flex items-center border-2 border-emGrey rounded-md overflow-hidden bg-emBgColor'>
+                    <div className={`text-2xl px-2 text-emBlue`}>
+                        <Icon icon='tabler:lock' />
+                    </div>
+                    <input id='password' placeholder={`Password`} type='password' className='block w-full bg-transparent p-1' {...register(`password`)} />
+                </div>
 
                 <div className={`flex items-center justify-between text-xs mb-3`}>
                     <Checkbox>Remember me</Checkbox>
@@ -50,7 +72,9 @@ const page = () => {
 
                 {/* submit button */}
                 <div>
-                    <Button className={`bg-emBlue text-white w-full`}>Sign in</Button>
+                    <Button type={`submit`} className={`bg-emBlue text-white w-full`}>
+                        Sign in
+                    </Button>
                 </div>
                 <div className={`w-full text-xs`}>
                     <p className={`my-3`}>
@@ -63,8 +87,8 @@ const page = () => {
                         By signing up you accept our Privacy Policy, Terms & Licensing Agreement. Protected by reCAPTCHA. Google Privacy Policy & Terms apply.
                     </p>
                 </div>
-            </Form>
+            </form>
         </section>
     );
 };
-export default page;
+export default SignIn;

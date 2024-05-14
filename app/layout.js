@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "rsuite/dist/rsuite-no-reset.min.css";
 import "./globals.css";
+import { AuthProvider } from "./Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,7 +13,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html className={`h-full`} lang='en'>
-            <body className={(inter.className, `bg-emBgColor h-full`)}>{children}</body>
+            <body className={(inter.className, `bg-emBgColor h-full`)}>
+                <AuthProvider>{children}</AuthProvider>
+            </body>
         </html>
     );
 }

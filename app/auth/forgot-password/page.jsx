@@ -21,15 +21,13 @@ const ForgotPassword = () => {
 
             <Form style={{ maxWidth: fn.rem(500) }}>
                 {/* email */}
-                <Form.Group controlId={"email"}>
-                    <InputGroup style={{ width: `100%`, border: `1px solid #1565D8`, backgroundColor: `#83979B50` }} inside>
-                        <InputGroup.Addon className={`text-blue-500`}>
-                            <Icon icon='system-uicons:mail' />
-                        </InputGroup.Addon>
-                        <Form.Control className={`border-4 bg-transparent`} type={`email`} name='email' placeholder='Email' />
-                        {/* <Input type={`email`} name='email' placeholder='Email' /> */}
-                    </InputGroup>
-                </Form.Group>
+                {/* email */}
+                <div class='my-2 flex items-center border-2 border-emGrey rounded-md overflow-hidden bg-emBgColor'>
+                    <div className={`text-2xl px-2 text-emBlue`}>
+                        <Icon icon='ic:outline-email' />
+                    </div>
+                    <input id='email' type='email' placeholder={`Email`} class='block w-full bg-transparent p-1' />
+                </div>
 
                 {/* submit button */}
                 <div>

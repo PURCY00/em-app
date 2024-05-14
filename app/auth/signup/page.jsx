@@ -1,13 +1,25 @@
 "use client";
 
-import { Button, Form, InputGroup } from "rsuite";
 import ImageWrapper from "../../components/ImageWrapper";
 import { Icon } from "@iconify/react";
 import logo from "@/public/logo.png";
 import { fn } from "@/utils/utilityFunction";
 import Link from "next/link";
+import { Button } from "rsuite";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
-const page = () => {
+const Signup = () => {
+    const router = useRouter();
+    const { register, handleSubmit, reset } = useForm({
+        criteriaMode: "all",
+    });
+
+    // this is the function that would handle the onSubmit action set in our <form></form> tag.
+    const handleMyForm = async (data) => {
+        console.log(data);
+    };
+
     return (
         <section>
             {/* header */}
@@ -20,47 +32,54 @@ const page = () => {
             </div>
             {/* form */}
 
-            <Form style={{ maxWidth: fn.rem(500) }}>
+            <form onSubmit={handleSubmit(handleMyForm)} style={{ maxWidth: fn.rem(500) }}>
                 {/* email */}
-                <Form.Group controlId={"email"}>
-                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
-                        <InputGroup.Addon className={`text-emBlue`}>
-                            <Icon icon='system-uicons:mail' />
-                        </InputGroup.Addon>
-                        <Form.Control className={`bg-transparent`} type={`email`} name='email' placeholder='Email' />
-                    </InputGroup>
-                </Form.Group>
+                <div className='my-2 flex items-center border-2 border-emGrey rounded-md overflow-hidden bg-emBgColor'>
+                    <div className={`text-2xl px-2 text-emBlue`}>
+                        <Icon icon='ic:outline-email' />
+                    </div>
+                    <input
+                        id='email'
+                        type='email'
+                        placeholder={`Email`}
+                        className='block w-full bg-transparent p-1'
+                        {...register("email")}
+                    />
+                </div>
+
                 {/* user name */}
-                <Form.Group controlId={"username"}>
-                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
-                        <InputGroup.Addon className={`text-emBlue`}>
-                            <Icon icon='ri:user-line' />
-                        </InputGroup.Addon>
-                        <Form.Control className={`bg-transparent`} name='username' placeholder='Username' />
-                    </InputGroup>
-                </Form.Group>
+                <div className='my-2 flex items-center border-2 border-emGrey rounded-md overflow-hidden bg-emBgColor'>
+                    <div className={`text-2xl px-2 text-emBlue`}>
+                        <Icon icon='lets-icons:user' />
+                    </div>
+                    <input id='username' placeholder={`username`} className='block w-full bg-transparent p-1' {...register("username")} />
+                </div>
                 {/* password */}
-                <Form.Group controlId={"password"}>
-                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
-                        <InputGroup.Addon className={`text-emBlue`}>
-                            <Icon icon='lets-icons:lock' />
-                        </InputGroup.Addon>
-                        <Form.Control className={`bg-transparent`} type={`password`} name='password' placeholder='Password' />
-                    </InputGroup>
-                </Form.Group>
+                <div className='my-2 flex items-center border-2 border-emGrey rounded-md overflow-hidden bg-emBgColor'>
+                    <div className={`text-2xl px-2 text-emBlue`}>
+                        <Icon icon='tabler:lock' />
+                    </div>
+                    <input id='password' placeholder={`Password`} type='password' className='block w-full bg-transparent p-1' {...register("password")} />
+                </div>
 
                 {/* confirm password */}
-                <Form.Group controlId={"confirm-password"}>
-                    <InputGroup style={{ width: `100%`, border: `1px solid #83979B`, backgroundColor: `#83979B50` }} inside>
-                        <InputGroup.Addon className={`text-emBlue`}>
-                            <Icon icon='lets-icons:lock' />
-                        </InputGroup.Addon>
-                        <Form.Control className={`bg-transparent`} type={`password`} name='confirm-password' placeholder='Confirm Password' />
-                    </InputGroup>
-                </Form.Group>
+                <div className='my-2 flex items-center border-2 border-emGrey rounded-md overflow-hidden bg-emBgColor'>
+                    <div className={`text-2xl px-2 text-emBlue`}>
+                        <Icon icon='tabler:lock' />
+                    </div>
+                    <input
+                        id='confirm_password'
+                        placeholder={`Confirm Password`}
+                        type='password'
+                        className='block w-full bg-transparent p-1'
+                        {...register("confirm_password")}
+                    />
+                </div>
                 {/* submit button */}
                 <div>
-                    <Button className={`bg-emBlue text-white w-full`}>Sign up</Button>
+                    <Button type={`submit`} className={`bg-emBlue text-white w-full`}>
+                        Sign up
+                    </Button>
                 </div>
                 <div className={`w-full text-xs`}>
                     <p className={`my-3`}>
@@ -73,8 +92,8 @@ const page = () => {
                         By signing up you accept our Privacy Policy, Terms & Licensing Agreement. Protected by reCAPTCHA. Google Privacy Policy & Terms apply.
                     </p>
                 </div>
-            </Form>
+            </form>
         </section>
     );
 };
-export default page;
+export default Signup;
