@@ -11,13 +11,20 @@ import { useRouter } from "next/navigation";
 
 const Signup = () => {
     const router = useRouter();
-    const { register, handleSubmit, reset } = useForm({
-        criteriaMode: "all",
-    });
+    // using react hook form "useForm()" method
+    const { register, handleSubmit } = useForm(); /** destructuring */
 
     // this is the function that would handle the onSubmit action set in our <form></form> tag.
     const handleMyForm = async (data) => {
         console.log(data);
+        const response = await fetch(`api/register`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        console.log(response);
     };
 
     return (
@@ -38,13 +45,7 @@ const Signup = () => {
                     <div className={`text-2xl px-2 text-emBlue`}>
                         <Icon icon='ic:outline-email' />
                     </div>
-                    <input
-                        id='email'
-                        type='email'
-                        placeholder={`Email`}
-                        className='block w-full bg-transparent p-1'
-                        {...register("email")}
-                    />
+                    <input id='email' type='email' placeholder={`Email`} className='block w-full bg-transparent p-1' {...register("email")} />
                 </div>
 
                 {/* user name */}
