@@ -16,15 +16,34 @@ const Signup = () => {
 
     // this is the function that would handle the onSubmit action set in our <form></form> tag.
     const handleMyForm = async (data) => {
-        console.log(data);
-        const response = await fetch(`api/register`, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-        console.log(response);
+        try {
+            const res = await fetch(`http://localhost:3000/api/auth/userExists`, {
+                method: `POST`,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email: data.email }),
+            });
+            const user = await res.json();
+            console.log(user);
+
+            if (user.user) {
+                console.log(`user already exist`);
+                return;
+            } else {
+                const response = await fetch(`http://localhost:3000/api/auth/register`, {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+                console.log(response);
+                if (response.ok) {
+                    router.push(`/`);
+                }
+            }
+        } catch (error) {}
     };
 
     return (

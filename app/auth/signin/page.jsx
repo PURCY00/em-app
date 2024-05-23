@@ -6,33 +6,31 @@ import logo from "@/public/logo.png";
 import { Button, Checkbox } from "rsuite";
 import { fn } from "@/utils/utilityFunction";
 import Link from "next/link";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
 
 const SignIn = () => {
-    // const router = useRouter();
-    const { register, handleSubmit, reset } = useForm({
+    const router = useRouter();
+    const { register, handleSubmit } = useForm({
         criteriaMode: "all",
     });
 
     const onSubmit = async (data) => {
         console.log(data);
-        // try {
-        //     const res = await fetch(`api/register`, {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(data),
-        //     });
-
-        //     if (res.ok) {
-        //         reset();
-        //         router.push(`/`);
-        //     }
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            const res = await signIn(`credentials`, {
+                email: data.email,
+                password: data.password,
+                redirect: false,
+            });
+            console.log(res);
+            if (res.ok) {
+                router.replace(`/`);
+            }
+        } catch (err) {
+            console.log(err);
+        }
     };
     return (
         <section>
