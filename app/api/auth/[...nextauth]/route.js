@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import { connectMongoDB } from "@/lib/mongodb";
-import User from "@/models/user";
-import NextAuth from "next-auth/next";
-=======
->>>>>>> 7186097b3ab912dc39ea3c29536416358ccc2638
 // use credentials provider so you can use your custom fields for authentication during login
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
