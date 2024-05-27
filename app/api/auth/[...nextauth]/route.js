@@ -1,24 +1,44 @@
-import NextAuth from "next-auth/next";
 // use credentials provider so you can use your custom fields for authentication during login
+import { connectMongoDB } from "@/lib/mongodb";
+import User from "@/models/user";
+import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
 
 const authOptions = {
     providers: [
         CredentialsProvider({
             name: `credentials`,
             // leave blank because we are using custom credentials from our login form
-            credentials: {},
-            async authorize(credentials) {
-                const user = { id: `1` };
-                return user;
+            credentials: {
+                // google login, facebook login...etc (0Auth)
+            },
+            async authorize(request) {
+                const { email, password } = request; //destructuring
+                try {
+                    await connectMongoDB();
+                    const user = await User.findOne({ email });
+                    if (!user) {
+                        return null;
+                    }
+
+                    const passwordsMatches = await bcrypt.compare(password, user.password);
+
+                    if (!passwordsMatches) {
+                        return null;
+                    }
+
+                    return user;
+                } catch (error) {
+                    console.log(error);
+                }
             },
         }),
     ],
     session: {
-        strategy: `jwt`,
+        strategy: `jwt`, //json web token
     },
     secret: process.env.NEXTAUTH_SECRET,
-
     pages: {
         signIn: `/app/auth/signin`,
     },
