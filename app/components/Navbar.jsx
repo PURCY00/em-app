@@ -9,6 +9,7 @@ import Link from "next/link";
 import { fn } from "@/utils/utilityFunction";
 import logo from "@/public/logo.png";
 import SearchInput from "./SearchInput";
+import { signOut } from "next-auth/react";
 
 const navigation = [
     { name: "Home", href: "/", icon: `mage:home-3-fill`, current: true },
@@ -105,7 +106,8 @@ const Navbar = () => {
                                             <Menu.Item>
                                                 {({ active }) => (
                                                     <Link
-                                                        href={`/auth/signin`}
+                                                        onClick={() => signOut()}
+                                                        href={``}
                                                         className={classNames(active ? "bg-gray-100" : "", "block px-4 py-2 text-sm text-gray-700")}
                                                     >
                                                         <div className={`flex items-center gap-4`}>

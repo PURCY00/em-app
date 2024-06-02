@@ -1,9 +1,10 @@
-import { fn } from "@/utils/utilityFunction";
-import { Icon } from "@iconify/react";
 import Image from "next/image";
 import EditProfileModal from "./EditProfileModal";
+import { useSession } from "next-auth/react";
 
 const AvatarComponent = () => {
+    const { data: session } = useSession();
+    console.log(session);
     return (
         <div className={`flex items-center justify-between gap-2`}>
             <div className={`flex items-center gap-2`}>
@@ -16,7 +17,7 @@ const AvatarComponent = () => {
                     />
                 </div>
                 <div>
-                    <p className={`font-semibold text-h5`}>John Doe</p>
+                    <p className={`font-semibold text-h5`}>{session?.user?.name}</p>
                     <p>0 Friends</p>
                 </div>
             </div>

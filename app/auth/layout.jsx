@@ -1,8 +1,10 @@
-import Image from "next/image";
 import authimg from "@/public/authimg.png";
 import ImageWrapper from "@/app/components/ImageWrapper";
 
-const layout = ({ children }) => {
+const Layout = ({ children }) => {
+    // const session = getServerSession(authOptions);
+    // if (session) redirect("/");
+
     return (
         <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 h-screen`}>
             {/* column 1 */}
@@ -17,6 +19,6 @@ const layout = ({ children }) => {
         </div>
     );
 };
-export default layout;
+export default Layout;
 
 // 581 x 822
