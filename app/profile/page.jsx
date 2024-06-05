@@ -2,20 +2,17 @@
 
 import GridLayout from "../components/GridLayout";
 import Navbar from "../components/Navbar";
+import PostProfileTemplate from "../components/PostProfileTemplate";
 import PostCreationTemplate from "../components/PostTemplate";
 import SideBar from "../components/SideBar";
 
 const ProfilePage = () => {
-    // react method
-    // const location = useLocation();
-    // console.log(location);
-
     return (
         <main>
             <nav>
                 <Navbar />
             </nav>
-            <GridLayout sideBar={<SideBar />} postView={<PostCreationTemplate />} />
+            <GridLayout sideBar={<SideBar />} postView={<PostProfileTemplate />} />
         </main>
     );
 };

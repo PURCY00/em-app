@@ -1,27 +1,37 @@
 import Image from "next/image";
 import EditProfileModal from "./EditProfileModal";
-import { useSession } from "next-auth/react";
+import { useGlobalState } from "../context/GlobalState";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const AvatarComponent = () => {
-    const { data: session } = useSession();
-    console.log(session);
+    const state = useGlobalState();
+    const [isLocationProfile, setLocationProfile] = useState(false);
+    const pathname = usePathname();
+
+    // if pathname is equals to "profile" hide the post creatino component
+
+    useEffect(() => {
+        if (pathname === `/profile`) {
+            setLocationProfile(true);
+        } else {
+            setLocationProfile(false);
+        }
+    }, [pathname]);
+
     return (
         <div className={`flex items-center justify-between gap-2`}>
-            <div className={`flex items-center gap-2`}>
-                <div style={{ width: `fit-content` }} className={`relative rounded-full overflow-hidden`}>
-                    <Image
-                        width={100}
-                        height={100}
-                        src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                        alt={`avatar-img`}
-                    />
+            <Link href={`/profile`} className={`flex items-center gap-2`}>
+                <div style={{ width: `7rem`, height: `7rem` }} className={`relative rounded-full overflow-hidden`}>
+                    <Image className={`w-full h-full object-cover`} width={500} height={500} src={state?.user?.profilePhoto} alt={`avatar-img`} />
                 </div>
                 <div>
-                    <p className={`font-semibold text-h5`}>{session?.user?.name}</p>
-                    <p>0 Friends</p>
+                    <p className={`font-semibold text-h5`}>{state?.user?.name}</p>
+                    <p>{state?.user?.followers?.length + state?.user?.following?.length} Friend(s)</p>
                 </div>
-            </div>
-            <div>
+            </Link>
+            <div hidden={!isLocationProfile}>
                 <EditProfileModal />
             </div>
         </div>

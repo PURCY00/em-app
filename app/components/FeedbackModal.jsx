@@ -3,7 +3,7 @@ import React from "react";
 const FeedbackModal = ({ show, onClose, feedback }) => {
     if (!show) return null;
 
-    const isError = feedback.status === "Error";
+    const isError = feedback?.status === "Error";
     const icon = isError ? (
         <svg className='h-6 w-6 text-red-600' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
             <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M6 18L18 6M6 6l12 12' />
@@ -27,9 +27,9 @@ const FeedbackModal = ({ show, onClose, feedback }) => {
                             {icon}
                         </div>
                         <div className='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
-                            <h3 className={`text-lg leading-6 font-medium ${textColor}`}>{feedback.status}</h3>
+                            <h3 className={`text-lg leading-6 font-medium ${textColor}`}>{feedback?.status}</h3>
                             <div className='mt-2'>
-                                <p className={`text-sm text-gray-500`}>{feedback.message}</p>
+                                <p className={`text-sm text-gray-500`}>{feedback?.message}</p>
                             </div>
                         </div>
                     </div>
