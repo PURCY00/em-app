@@ -2,11 +2,14 @@ import { connectMongoDB } from "@/lib/mongodb";
 import Post from "@/models/post";
 import { NextResponse } from "next/server";
 
+// Mark the route as dynamic
+export const dynamic = "force-dynamic";
+
 export async function GET(req) {
     try {
         await connectMongoDB(); // Connect to MongoDB
 
-        const url = new URL(req.url);
+        const url = new URL(req.nextUrl);
         const id = url.searchParams.get("id"); // Extract ID from query parameters
 
         if (!id) {
