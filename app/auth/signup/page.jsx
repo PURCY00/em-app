@@ -27,7 +27,8 @@ const Signup = () => {
         setLoading(true);
         setErrorMessage("");
         try {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_NEXTAUTH_BASEURL}/api/auth/userExists`, {
+            const res = await axios.post(`/api/auth/userExists`, {
+                // const res = await axios.post(`${process.env.NEXT_PUBLIC_NEXTAUTH_BASEURL}/api/auth/userExists`, {
                 email: data.email,
             });
             if (res.data.user) {
@@ -35,7 +36,8 @@ const Signup = () => {
                 setErrorMessage("User already exists");
                 return;
             } else {
-                const response = await axios.post(`${process.env.NEXT_PUBLIC_NEXTAUTH_BASEURL}/api/auth/register`, data);
+                const response = await axios.post(`/api/auth/register`, data);
+                // const response = await axios.post(`${process.env.NEXT_PUBLIC_NEXTAUTH_BASEURL}/api/auth/register`, data);
                 if (response.status === 201) {
                     setLoading(false);
                     router.push(`/auth/signin`);

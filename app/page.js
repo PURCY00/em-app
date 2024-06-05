@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+
 import GridLayout from "./components/GridLayout";
 import Navbar from "./components/Navbar";
 import PostCreationTemplate from "./components/PostTemplate";

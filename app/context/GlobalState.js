@@ -52,9 +52,6 @@ export async function likePost(dispatch, postId) {
     console.log(postId);
     try {
         const res = await toggleLikePost(postId);
-        // if (res.status === 200) {
-        //     getAuthUser(dispatch);
-        // }
         return res;
     } catch (error) {
         throw new Error(error.response?.data?.error || error.message);

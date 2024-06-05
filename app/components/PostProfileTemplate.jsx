@@ -30,7 +30,7 @@ const PostProfileTemplate = () => {
         };
 
         fetchPosts();
-    }, [dispatch, pathname, state?.user?._id]);
+    }, [dispatch, pathname, session?.user?.id]);
 
     const postCardList = state?.userPosts?.map((post) => {
         return <PostCard post={post} key={post._id} />;

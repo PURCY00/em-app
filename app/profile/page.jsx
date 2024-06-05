@@ -3,7 +3,6 @@
 import GridLayout from "../components/GridLayout";
 import Navbar from "../components/Navbar";
 import PostProfileTemplate from "../components/PostProfileTemplate";
-import PostCreationTemplate from "../components/PostTemplate";
 import SideBar from "../components/SideBar";
 
 const ProfilePage = () => {
