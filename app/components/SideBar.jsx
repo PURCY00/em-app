@@ -5,13 +5,12 @@ import AvatarComponent from "./AvatarComponent";
 import { fn } from "@/utils/utilityFunction";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useGlobalState } from "../context/GlobalState";
 
 const SideBar = () => {
+    const state = useGlobalState();
     const [isLocationProfile, setLocationProfile] = useState(false);
-
-    // // next method
     const pathname = usePathname();
-    console.log(pathname);
 
     // if pathname is equals to "profile" hide the post creatino component
 
@@ -28,10 +27,7 @@ const SideBar = () => {
             <hr className={`my-5`} />
             <section>
                 <p className={`text-h6 font-semibold`}>Bio</p>
-                <p className={`text-sm`}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, voluptatem beatae consectetur, recusandae cupiditate fugit dolore
-                    expedita tempore est quae ipsam minima quo nisi animi esse distinctio velit temporibus. Omnis.
-                </p>
+                <p className={`text-sm`}>{state?.user?.bio}</p>
             </section>
             <section hidden={!isLocationProfile}>
                 <hr className={`my-5`} />
@@ -42,14 +38,14 @@ const SideBar = () => {
                             <Icon className={`text-emBlue`} fontSize={fn.rem(41)} icon='mingcute:group-3-line' />
                             <p>Followers</p>
                         </div>
-                        <p>1000</p>
+                        <p>{state?.user?.followers?.length}</p>
                     </div>
                     <div className={`flex items-center justify-between`}>
                         <div className={`flex items-center gap-4`}>
                             <Icon className={`text-emBlue`} fontSize={fn.rem(41)} icon='mingcute:group-2-line' />
                             <p>Following</p>
                         </div>
-                        <p>1000</p>
+                        <p>{state?.user?.following?.length}</p>
                     </div>
                     <div className={`flex items-center justify-between`}>
                         <div className={`flex items-center gap-4`}>
@@ -62,15 +58,15 @@ const SideBar = () => {
             </section>
             <hr className={`my-5`} />
             <section>
-                <p className={`text-h6 font-semibold`}>Info</p>
+                <p className={`text-h6 font-semibold`}>Info & Location</p>
                 <div className={`flex flex-col gap-4`}>
                     <div className={`flex items-center gap-4`}>
                         <Icon className={`text-emBlue`} fontSize={fn.rem(41)} icon='bx:map' />
-                        <p>Lagos, Nigeria</p>
+                        <p>{state?.user?.location}</p>
                     </div>
                     <div className={`flex items-center gap-4`}>
                         <Icon className={`text-emBlue`} fontSize={fn.rem(41)} icon='ph:briefcase-light' />
-                        <p>Realtor</p>
+                        <p>{state?.user?.job}</p>
                     </div>
                 </div>
             </section>
@@ -80,11 +76,11 @@ const SideBar = () => {
                 <div className={`flex flex-col gap-4`}>
                     <div className={`flex items-center gap-4`}>
                         <Icon className={`text-emBlue`} fontSize={fn.rem(41)} icon='prime:twitter' />
-                        <p>Twitter</p>
+                        <p>{state?.user?.twitter}</p>
                     </div>
                     <div className={`flex items-center gap-4`}>
                         <Icon className={`text-emBlue`} fontSize={fn.rem(41)} icon='mingcute:linkedin-line' />
-                        <p>Linkedin</p>
+                        <p>{state?.user?.linkedIn}</p>
                     </div>
                 </div>
             </section>

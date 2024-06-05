@@ -1,9 +1,12 @@
+"use client";
+
 import GridLayout from "./components/GridLayout";
 import Navbar from "./components/Navbar";
 import PostCreationTemplate from "./components/PostTemplate";
 import SideBar from "./components/SideBar";
 
 const Home = () => {
+
     return (
         <main>
             <nav>

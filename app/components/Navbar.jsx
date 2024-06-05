@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Icon } from "@iconify/react";
 import ImageWrapper from "./ImageWrapper";
@@ -9,6 +9,8 @@ import Link from "next/link";
 import { fn } from "@/utils/utilityFunction";
 import logo from "@/public/logo.png";
 import SearchInput from "./SearchInput";
+import { signOut, useSession } from "next-auth/react";
+import { getAuthUser, useGlobalDispatch, useGlobalState } from "../context/GlobalState";
 
 const navigation = [
     { name: "Home", href: "/", icon: `mage:home-3-fill`, current: true },
@@ -20,6 +22,16 @@ function classNames(...classes) {
 }
 
 const Navbar = () => {
+    const state = useGlobalState();
+    const dispatch = useGlobalDispatch();
+
+    useEffect(() => {
+        const getUser = async () => {
+            getAuthUser(dispatch);
+        };
+        getUser();
+    }, [dispatch]);
+
     return (
         <Disclosure as='nav' className='bg-white'>
             {({ open }) => (
@@ -64,12 +76,8 @@ const Navbar = () => {
                                 {/* Profile dropdown */}
                                 <Menu as='div' className='relative ml-3'>
                                     <div>
-                                        <Menu.Button className='relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
-                                            <img
-                                                className='h-16 w-16 rounded-full'
-                                                src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                                                alt=''
-                                            />
+                                        <Menu.Button className='relative flex rounded-full bg-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
+                                            <img className='h-16 w-16 rounded-full' src={state?.user?.profilePhoto} alt='' />
                                         </Menu.Button>
                                     </div>
                                     <Transition
@@ -105,7 +113,8 @@ const Navbar = () => {
                                             <Menu.Item>
                                                 {({ active }) => (
                                                     <Link
-                                                        href={`/auth/signin`}
+                                                        onClick={() => signOut()}
+                                                        href={``}
                                                         className={classNames(active ? "bg-gray-100" : "", "block px-4 py-2 text-sm text-gray-700")}
                                                     >
                                                         <div className={`flex items-center gap-4`}>

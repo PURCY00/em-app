@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import PostCard from "./PostCard";
-import PostsubmissionTemplate from "./PostsubmissionTemplate";
-import { getAllPost, getPostsById, useGlobalDispatch, useGlobalState } from "../context/GlobalState";
+import { getPostsById, useGlobalDispatch, useGlobalState } from "../context/GlobalState";
+import { useSession } from "next-auth/react";
 
-const PostCreationTemplate = () => {
+const PostProfileTemplate = () => {
     const dispatch = useGlobalDispatch();
     const state = useGlobalState();
+    const { data: session } = useSession();
     const [loading, setLoading] = useState(false);
     const [noPosts, setNoPosts] = useState(false);
     const pathname = usePathname();
@@ -16,8 +17,8 @@ const PostCreationTemplate = () => {
             setLoading(true);
             setNoPosts(false); // Reset noPosts state before fetching
             try {
-                const posts = await getAllPost(dispatch);
-                if (posts?.length) {
+                const posts = await getPostsById(dispatch, session?.user?.id);
+                if (posts) {
                     setNoPosts(true);
                 }
             } catch (error) {
@@ -29,9 +30,9 @@ const PostCreationTemplate = () => {
         };
 
         fetchPosts();
-    }, [dispatch, pathname, state?.user?._id]);
+    }, [dispatch, pathname, session?.user?.id]);
 
-    const postCardList = state?.posts?.map((post) => {
+    const postCardList = state?.userPosts?.map((post) => {
         return <PostCard post={post} key={post._id} />;
     });
 
@@ -46,15 +47,10 @@ const PostCreationTemplate = () => {
                     <p>No posts found.</p>
                 </div>
             ) : (
-                <>
-                    <section className={`mb-4`}>
-                        <PostsubmissionTemplate />
-                    </section>
-                    <section className={`mb-4 flex flex-col gap-4`}>{postCardList}</section>
-                </>
+                <section className={`mb-4 flex flex-col gap-4`}>{postCardList}</section>
             )}
         </main>
     );
 };
 
-export default PostCreationTemplate;
+export default PostProfileTemplate;
