@@ -34,7 +34,7 @@ const SignIn = () => {
                 redirect: false,
             });
             if (res.ok) {
-                router.replace("/");
+                router.push("/");
             } else {
                 setErrorMessage("Invalid email or password");
             }
@@ -45,9 +45,9 @@ const SignIn = () => {
         setLoading(false);
     };
 
-    useEffect(() => {
-        if (session?.user) redirect("/");
-    }, [session?.user]);
+    // useEffect(() => {
+    //     if (session?.user) redirect("/");
+    // }, [session?.user]);
 
     return (
         <section>
