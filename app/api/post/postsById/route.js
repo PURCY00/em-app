@@ -6,8 +6,8 @@ export async function GET(req) {
     try {
         await connectMongoDB(); // Connect to MongoDB
 
-        const { searchParams } = new URL(req.url);
-        const id = searchParams.get("id"); // Extract ID from query parameters
+        const url = new URL(req.url);
+        const id = url.searchParams.get("id"); // Extract ID from query parameters
 
         if (!id) {
             return NextResponse.json({ message: "User ID is required" }, { status: 400 });
@@ -17,7 +17,7 @@ export async function GET(req) {
         const posts = await Post.find({ user: id }).populate("user", "name profilePhoto").lean();
 
         if (!posts.length) {
-            return NextResponse.json({ message: "No posts found for this user" }, { status: 400 });
+            return NextResponse.json({ message: "No posts found for this user" }, { status: 404 });
         }
 
         return NextResponse.json(posts, { status: 200 });

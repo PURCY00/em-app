@@ -8,11 +8,10 @@ import { fn } from "@/utils/utilityFunction";
 import Link from "next/link";
 import { useRouter, redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { signIn, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
 
 const SignIn = () => {
-    const { data: session } = useSession();
     const router = useRouter();
     const {
         register,
@@ -44,10 +43,6 @@ const SignIn = () => {
         }
         setLoading(false);
     };
-
-    // useEffect(() => {
-    //     if (session?.user) redirect("/");
-    // }, [session?.user]);
 
     return (
         <section>
